@@ -1,0 +1,4 @@
+---- BASIC_TIM_IRQHandler Matches (3 in 2 files) ----
+bsp_TiMbase.h (user\timbase):#define            BASIC_TIM_IRQHandler        TIM2_IRQHandler
+bsp_TiMbase.h (user\timbase):#define            BASIC_TIM_IRQHandler        TIM3_IRQHandler
+Stm32f10x_it.c (user):void  BASIC_TIM_IRQHandler (void)
