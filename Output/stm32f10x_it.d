@@ -33,3 +33,4 @@
 ..\..\output\stm32f10x_it.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
 ..\..\output\stm32f10x_it.o: ..\..\User\usart\bsp_usart.h
 ..\..\output\stm32f10x_it.o: ..\..\User\TimBase\bsp_TiMbase.h
+..\..\output\stm32f10x_it.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdbool.h

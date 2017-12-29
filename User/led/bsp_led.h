@@ -17,9 +17,9 @@
 #define LED2_GPIO_PIN		GPIO_Pin_7                 /* 连接到SCL时钟线的GPIO */
 
 // B-蓝色 脉冲信号
-#define LED3_GPIO_PORT    	GPIOA			              /* GPIO端口 */
-#define LED3_GPIO_CLK 	    RCC_APB2Periph_GPIOA		/* GPIO端口时钟 */
-#define LED3_GPIO_PIN		GPIO_Pin_8			        /* 连接到SCL时钟线的GPIO */
+#define LED3_GPIO_PORT    	GPIOB			              /* GPIO端口 */
+#define LED3_GPIO_CLK 	    RCC_APB2Periph_GPIOB		/* GPIO端口时钟 */
+#define LED3_GPIO_PIN		GPIO_Pin_15			        /* 连接到SCL时钟线的GPIO */
 
 // D-脱机
 #define LED4_GPIO_PORT    	GPIOB			              /* GPIO端口 */
@@ -29,7 +29,7 @@
 //DRV8825使能信号
 #define LED5_GPIO_PORT    	GPIOA			              /* GPIO端口 */
 #define LED5_GPIO_CLK 	    RCC_APB2Periph_GPIOA		/* GPIO端口时钟 */
-#define LED5_GPIO_PIN		GPIO_Pin_4		        /* 连接到SCL时钟线的GPIO */
+#define LED5_GPIO_PIN		    GPIO_Pin_4		        /* 连接到SCL时钟线的GPIO */
 
 //M0信号 
 #define M0_GPIO_PORT        GPIOA

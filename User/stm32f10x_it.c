@@ -28,11 +28,13 @@
 #include "bsp_usart_blt.h"
 #include "bsp_usart.h"
 #include "bsp_TiMbase.h"
-
+#include "stdbool.h"
 
 extern volatile uint32_t time;
-
-
+extern bool bStateflag;	           
+extern bool bStateCount;            
+extern int uStepCount;
+	
 //接收数组指针
 extern unsigned char UART_RxPtr;
 
@@ -148,7 +150,16 @@ void  BASIC_TIM_IRQHandler (void)
 {
 	if ( TIM_GetITStatus( BASIC_TIM, TIM_IT_Update) != RESET ) 
 	{	
-		time++;
+		
+		if ((bStateflag == false) && (bStateCount == true) )
+		{
+			uStepCount--;	
+		}								
+		else if ((bStateflag == false) && (bStateCount == false))
+		{
+			uStepCount++;
+		}
+		
 		TIM_ClearITPendingBit(BASIC_TIM , TIM_FLAG_Update);  		 
 	}		 	
 }

@@ -155,7 +155,7 @@ void CmdProcess(unsigned char *RxBuffer)
 
 								break;
 					        }
-                   case 'p':
+          case 'p':
 				   			{
 								if (uStepCount >= 0)
 									sprintf(ReplyBuff,":p+%d*%d\n", uStepCount,!bStateflag);//转动状态也加入位置数据末尾，如:F+10000*1#
@@ -184,7 +184,7 @@ void CmdProcess(unsigned char *RxBuffer)
 								{
 									GPIO_ResetBits(LED2_GPIO_PORT, LED2_GPIO_PIN);   //dir信号
 								}
-								GPIO_ResetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
+								ControlMotor(ENABLE);
 								bStateflag = false;
 								bStateCount = false;
 								sprintf(ReplyBuff,":-#\n");
@@ -202,7 +202,7 @@ void CmdProcess(unsigned char *RxBuffer)
 								{
 									GPIO_SetBits(LED2_GPIO_PORT, LED2_GPIO_PIN);   //dir信号
 								}						
-								GPIO_ResetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
+								ControlMotor(ENABLE);
 								bStateflag = false;
 								bStateCount = true;
 								sprintf(ReplyBuff,":+#\n");
@@ -211,7 +211,7 @@ void CmdProcess(unsigned char *RxBuffer)
 				            }
 				   case 'Q': 				//:FQ#    
 							{
-								GPIO_SetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
+								ControlMotor(DISABLE);
 								bStateflag = true;
 								bStateCount = true;
 								sprintf(ReplyBuff,":Q#\n");
@@ -220,7 +220,7 @@ void CmdProcess(unsigned char *RxBuffer)
 							}
 				  case 'R': 				//:FR#    
 							{
-								GPIO_SetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
+								ControlMotor(DISABLE);
 								brightleft = !brightleft;                                  //方向信号
 								bStateflag = true;	
 								bStateCount = true;
@@ -234,7 +234,7 @@ void CmdProcess(unsigned char *RxBuffer)
 							if (RxBuffer[3] == '+')
 							{
 								uStepCount = atoi((char const *)RxBuffer+4);
-								GPIO_SetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
+								ControlMotor(DISABLE);
 								bStateflag = true;
 								bStateCount = true;
 								sprintf(ReplyBuff,":S#\n");
@@ -268,7 +268,7 @@ void CmdProcess(unsigned char *RxBuffer)
 							iStepCount = uCmdstep - uStepCount;
 							if (iStepCount > 0)
 							{
-								GPIO_ResetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号							
+								ControlMotor(ENABLE);							
 								if (brightleft == false)
 									GPIO_SetBits(LED2_GPIO_PORT, LED2_GPIO_PIN); //DIR
 								else
@@ -278,7 +278,7 @@ void CmdProcess(unsigned char *RxBuffer)
 							}
 							else
 							{
-								GPIO_ResetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
+								ControlMotor(ENABLE);
 								if (brightleft == false)
 									GPIO_ResetBits(LED2_GPIO_PORT, LED2_GPIO_PIN); //DIR
 								else
@@ -300,6 +300,8 @@ void CmdProcess(unsigned char *RxBuffer)
 								uSpeed = 1;
 							else if(uSpeed>1024)
 								uSpeed = 1024;
+							SetSpeedMoter(uSpeed);
+							
 							sprintf(ReplyBuff, ":V#\n");
 							
 							break;
@@ -370,42 +372,19 @@ int main()
 			clean_rebuff();
 			ReplyBuff[0] = '\0';
 	  }
-	  
-     //电机控制
-    if ( time > uSpeed ) /* 1000 * 1 ms = 1s 时间到 */
-    {
-			time = 0;
-			
-			/* LED3 取反 */  
-			if (bCount)
-			{
-				bCount = false;
-				if ((bStateflag == false) && (bStateCount == true) )
-				{
-					uStepCount--;	
-				}								
-				else if ((bStateflag == false) && (bStateCount == false))
-				{
-					uStepCount++;
-				}				
-			}			
-			else
-				bCount = true;
-			
-			LED3_TOGGLE; //step	
-			
-			
-			if ((((iStepCount>0)&&(uStepCount >= uCmdstep))||((iStepCount<0)&&(uStepCount <= uCmdstep))) && (bCmdequ == true))
-			{
-				GPIO_SetBits(LED5_GPIO_PORT, LED5_GPIO_PIN); //DRV8825使能信号
 
-				bStateflag = true;
+	  if ((((iStepCount>0)&&(uStepCount >= uCmdstep))||((iStepCount<0)&&(uStepCount <= uCmdstep))) && (bCmdequ == true))
+	  {
+			ControlMotor(DISABLE);
 
-				bStateCount = true;	
+			bStateflag = true;
 
-				bCmdequ = false;
-			} 	
-    } 
+			bStateCount = true;	
+
+			bCmdequ = false;
+	  } 	
+
+	 
 		
 	}
 }

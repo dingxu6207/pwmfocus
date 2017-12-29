@@ -29,3 +29,6 @@
 ..\..\output\bsp_timbase.o: ..\..\Libraries\FWlib\inc\stm32f10x_usart.h
 ..\..\output\bsp_timbase.o: ..\..\Libraries\FWlib\inc\stm32f10x_wwdg.h
 ..\..\output\bsp_timbase.o: ..\..\Libraries\FWlib\inc\misc.h
+..\..\output\bsp_timbase.o: ..\..\User\usart\bsp_usart.h
+..\..\output\bsp_timbase.o: d:\Keil_v5\ARM\ARMCC\bin\..\include\stdio.h
+..\..\output\bsp_timbase.o: ..\..\User\led\bsp_led.h
