@@ -1,7 +1,10 @@
----- TIM2_IRQHandler Matches (6 in 2 files) ----
-bsp_TiMbase.h (user\timbase):#define            BASIC_TIM_IRQHandler        TIM2_IRQHandler
-流水灯.htm (output): <LI><a href="#[26]">TIM2_IRQHandler</a> from stm32f10x_it.o(.text) referenced from startup_stm32f10x_hd.o(RESET)
-流水灯.htm (output):<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
-流水灯.htm (output):<BR><BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM2_IRQHandler
-流水灯.htm (output):<P><STRONG><a name="[26]"></a>TIM2_IRQHandler</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, stm32f10x_it.o(.text))
-流水灯.htm (output):<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = TIM2_IRQHandler &rArr; TIM_GetITStatus
+---- uSpeed Matches (10 in 1 files) ----
+Main.c (user)://u16 uSpeed = uSpeedCmd[9];		    //速度值
+Main.c (user):u16 uSpeed = 256;		    //速度值
+Main.c (user):							uSpeed = atoi((char const *)RxBuffer+3);
+Main.c (user):							if(uSpeed<1) 
+Main.c (user):								uSpeed = 1;
+Main.c (user):							else if(uSpeed>1024)
+Main.c (user):								uSpeed = 1024;
+Main.c (user):							//printf("uSpeed = %d\n" ,uSpeed);
+Main.c (user):							SetSpeedMoter(uSpeed);

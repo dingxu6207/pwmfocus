@@ -160,7 +160,7 @@ void  BASIC_TIM_IRQHandler (void)
 			uStepCount++;
 		}
 
-		//printf("it is 1HZ!\n");
+		//printf("it is HZ test!\n");
 		TIM_ClearITPendingBit(BASIC_TIM , TIM_FLAG_Update);  		 
 	}		 	
 }
