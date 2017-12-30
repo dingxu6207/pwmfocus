@@ -302,6 +302,7 @@ void CmdProcess(unsigned char *RxBuffer)
 							else if(uSpeed>1024)
 								uSpeed = 1024;
 							#endif
+							//printf("uSpeed = %d\n" ,uSpeed);
 							
 							SetSpeedMoter(uSpeed);
 							
