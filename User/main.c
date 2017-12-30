@@ -296,10 +296,13 @@ void CmdProcess(unsigned char *RxBuffer)
 						{
 							uSpeed = atoi((char const *)RxBuffer+3);
 							//ÏÞÖÆuSpeed·¶Î§ÔÚ1-1024
+							#if 0
 							if(uSpeed<1) 
 								uSpeed = 1;
 							else if(uSpeed>1024)
 								uSpeed = 1024;
+							#endif
+							
 							SetSpeedMoter(uSpeed);
 							
 							sprintf(ReplyBuff, ":V#\n");
