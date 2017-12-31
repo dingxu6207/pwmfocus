@@ -47,7 +47,7 @@ int uCmdstep = 0;                   //ÃüÁî²½Êı
 int iStepCount = 0;
 u8 Mode = 0;
 
-
+//extern bool IoState;
 
 void SetMode(int sMode);
 
@@ -388,7 +388,7 @@ int main()
 			bCmdequ = false;
 	  } 	
 
-	 
+	  
 		
 	}
 }

@@ -29,6 +29,7 @@
 #include "bsp_usart.h"
 #include "bsp_TiMbase.h"
 #include "stdbool.h"
+#include "bsp_led.h"
 
 extern volatile uint32_t time;
 extern bool bStateflag;	           
@@ -145,11 +146,12 @@ void DebugMon_Handler(void)
 void PendSV_Handler(void)
 {
 }
-
+bool IoState = true;
 void  BASIC_TIM_IRQHandler (void)
 {
 	if ( TIM_GetITStatus( BASIC_TIM, TIM_IT_Update) != RESET ) 
 	{	
+		//LED3_TOGGLE;
 		
 		if ((bStateflag == false) && (bStateCount == true) )
 		{
@@ -158,10 +160,19 @@ void  BASIC_TIM_IRQHandler (void)
 		else if ((bStateflag == false) && (bStateCount == false))
 		{
 			uStepCount++;
+			
 		}
+     
+		if(IoState)
+			GPIO_SetBits(LED3_GPIO_PORT, LED3_GPIO_PIN);
+		else
+			GPIO_ResetBits(LED3_GPIO_PORT, LED3_GPIO_PIN);
+		
+		IoState = !IoState;
+		
+		TIM_ClearITPendingBit(BASIC_TIM , TIM_FLAG_Update);
 
-		//printf("it is HZ test!\n");
-		TIM_ClearITPendingBit(BASIC_TIM , TIM_FLAG_Update);  		 
+    //LED3_TOGGLE;		
 	}		 	
 }
 

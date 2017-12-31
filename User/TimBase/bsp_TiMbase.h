@@ -6,15 +6,15 @@
 #define            BASIC_TIM                   TIM1
 #define            BASIC_TIM_APBxClock_FUN     RCC_APB2PeriphClockCmd
 #define            BASIC_TIM_CLK               RCC_APB2Periph_TIM1
-#define            BASIC_TIM_Period            (10000-1)
+#define            BASIC_TIM_Period            (100-1)
 #define            BASIC_TIM_Prescaler         (72-1) 
 #define            BASIC_TIM_IRQ               TIM1_UP_IRQn
 #define            BASIC_TIM_IRQHandler        TIM1_UP_IRQHandler
 
 // TIM1 输出比较通道
 #define ADVANCE_TIM_CH1_GPIO_CLK 		RCC_APB2Periph_GPIOA
-#define ADVANCE_TIM_CH1_PORT 			GPIOA
-#define ADVANCE_TIM_CH1_PIN 			GPIO_Pin_8
+#define ADVANCE_TIM_CH1_PORT 			  GPIOA
+#define ADVANCE_TIM_CH1_PIN 			  GPIO_Pin_8
 
 
 
